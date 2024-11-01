@@ -74,7 +74,6 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                 <?php 
-                print_r($projets);
                 foreach ($projets as $projet) {
                     // Fetch images for each project
                     print_r($projet);
