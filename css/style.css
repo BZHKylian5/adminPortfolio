@@ -17,6 +17,7 @@ body {
     background-color: #f4f4f4; /* Couleur de fond douce */
     color: #333; /* Couleur du texte */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
