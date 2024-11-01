@@ -25,7 +25,7 @@ if ($stmt === false) {
 $stmt->bind_param("i", $idUser); // Lie l'ID utilisateur à la requête
 $stmt->execute();
 $result = $stmt->get_result();
-$user = $result->fetch_assoc();
+$profile = $result->fetch_assoc();
 
 
 ?>
