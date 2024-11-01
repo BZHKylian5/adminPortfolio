@@ -12,7 +12,7 @@ header {
     display: flex; /* Utiliser flexbox pour aligner les éléments */
     align-items: center; /* Centrer verticalement */
     justify-content: space-between; /* Espacement entre les éléments */
-    padding:1.3em
+    padding:1.3em 3em
 }
 
 header img {
@@ -37,7 +37,7 @@ header a:hover {
 
 /* Ajoutez un espacement supérieur pour le contenu principal afin qu'il ne soit pas caché sous l'en-tête */
 main {
-    margin-top: 7em; /* Ajustez selon la hauteur de l'en-tête */
+    margin-top: 9em; /* Ajustez selon la hauteur de l'en-tête */
 }
 
 body {
