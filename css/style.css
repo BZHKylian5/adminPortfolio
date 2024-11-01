@@ -12,11 +12,12 @@ header {
     display: flex; /* Utiliser flexbox pour aligner les éléments */
     align-items: center; /* Centrer verticalement */
     justify-content: space-between; /* Espacement entre les éléments */
+    padding:1em
 }
 
 header img {
-    width: 7em; /* Ajustez la taille de l'image du logo */
-    margin:1em
+    width: 5em; /* Ajustez la taille de l'image du logo */
+    
 }
 
 header a {
