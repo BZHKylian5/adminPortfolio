@@ -12,10 +12,7 @@ $stmt -> execute();
 $result = $stmt -> get_result();
 $user = $result -> fetch_assoc();
 
-$stmt = $conn -> prepare("SELECT u.nom, u.email, pp.url AS photo_profil FROM utilisateur u LEFT JOIN photo_profil pp ON u.id_utilisateur = pp.id_utilisateur WHERE u.id_utilisateur = '$idUser'");
-$stmt -> execute();
-$result = $stmt -> get_result();
-$profile = $result -> fetch_assoc();
+
 
 ?>
 
@@ -39,7 +36,7 @@ $profile = $result -> fetch_assoc();
                 <div id="profileMenu" class="hidden">
                     <span id="backButton">< Retour</span>
                     <figure id="imagProfil">
-                        <img src="<?php echo $user["url"] ?>" title="photo de profil utilisateur" id="menuProfilePic">
+                        <img src="<?php echo $profile["url"] ?>" title="photo de profil utilisateur" id="menuProfilePic">
                         <figcaption>
                             <?php
 
@@ -64,14 +61,7 @@ $profile = $result -> fetch_assoc();
         }
         ?>
     </div>
-
-            }
-            else{
-        ?>
-        <a href="login.php">Connexion</a>
-        <?php    
-            }
-        ?>
+        
     </header>
 
     <main>
