@@ -76,7 +76,9 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
                 <?php 
                 foreach ($projets as $projet) {
                     // Fetch images for each project
-                    print_r($projet);
+                    echo $projet['titre'];
+                    echo $projet['description'];
+                    
                     $stmt = $conn->prepare("SELECT * FROM photo_projet pp LEFT JOIN image i ON pp.id_image = i.id_image WHERE pp.id_projet = ?");
                     $stmt->bind_param("i", $projet['id_projet']);
                     $stmt->execute();
@@ -88,8 +90,8 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
                     <div class="swiper-slide">
                         <div class="slide-background" style="background-image: url('<?php echo $imageUrl; ?>');"></div>
                         <div class="description-banner">
-                            <h3><?php echo $projets[0]['titre'] ?></h3>
-                            <p><?php echo $projets[0]['description']; ?></p>
+                            <h3><?php echo $projet['titre'] ?></h3>
+                            <p><?php echo $projet['description']; ?></p>
                         </div>
                     </div>
                     <?php
