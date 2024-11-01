@@ -1,32 +1,33 @@
 <?php
 require_once "config.php";
-// Vérifie si l'utilisateur est connecté
 
+// Vérifie si l'utilisateur est connecté
 if (!isset($_SESSION['idUser'])) {
     header("Location: login.php"); // Redirige vers la page de connexion
     exit(); // Assure que le script s'arrête après la redirection
 }
 
-$stmt = $conn -> prepare("SELECT * from utilisateur WHERE id_utilisateur = '$idUser'");
-$stmt -> execute();
-$result = $stmt -> get_result();
-$user = $result -> fetch_assoc();
+$idUser = $_SESSION['idUser']; // Assurez-vous que vous récupérez l'ID utilisateur de la session
 
-
+$stmt = $conn->prepare("SELECT * from utilisateur WHERE id_utilisateur = ?");
+$stmt->bind_param("i", $idUser);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
 
 $stmt = $conn->prepare("SELECT url AS photo_profil
                          FROM utilisateur u
                          LEFT JOIN photo_profil pp ON u.id_utilisateur = pp.id_utilisateur
-                         WHERE u.id_utilisateur = '$idUser'");
+                         WHERE u.id_utilisateur = ?");
 if ($stmt === false) {
     die("Erreur de préparation de la requête : " . $conn->error); // Affiche l'erreur si la préparation échoue
 }
 
+// Lier le paramètre
+$stmt->bind_param("i", $idUser);
 $stmt->execute();
 $result = $stmt->get_result();
 $profile = $result->fetch_assoc();
-
-
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +42,7 @@ $profile = $result->fetch_assoc();
     <header>    
         <img src="./asset/img/logo/logo_KH_Admin.png" alt="logo du site web un K et un H imbriquer">
         <?php
-            if($isLoggedIn){
+            if (isset($user)) { // Vérifiez si l'utilisateur est défini
                 ?>
                 <img id="profilePic" src="<?php echo htmlspecialchars($profile["photo_profil"]) ?>" title="Photo de profil utilisateur">
 
@@ -52,7 +53,7 @@ $profile = $result->fetch_assoc();
                         <img src="<?php echo htmlspecialchars($profile["photo_profil"]) ?>" title="photo de profil utilisateur" id="menuProfilePic">
                         <figcaption>
                             <?php
-
+                            // Vous pouvez ajouter des informations supplémentaires ici
                             ?>
                         </figcaption>
                     </figure>
@@ -62,19 +63,17 @@ $profile = $result->fetch_assoc();
                         <li><a href="">Modifier un projet</a></li>
                     </ul>
                     <div>
-                        <a id="logoutButton" class="buttonMenu"  href="logout.php">Déconnexion</a>
+                        <a id="logoutButton" class="buttonMenu" href="logout.php">Déconnexion</a>
                     </div>
                 </div>
 
             <?php
-        } else {
+            } else {
+                ?>
+                <a href="../login.php"><div id="btnConn">Connexion</div></a>
+            <?php
+            }
             ?>
-            <a href="../login.php"><div id="btnConn">Connexion</div></a>
-        <?php
-        }
-        ?>
-    </div>
-        
     </header>
 
     <main>
