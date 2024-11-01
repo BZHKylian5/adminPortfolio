@@ -88,7 +88,11 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
                         <div class="slide-background" style="background-image: url('<?php echo $imageUrl; ?>');"></div>
                         <div class="description-banner">
                             <h3><?php echo $projet['titre'] ?></h3>
-                            <p><?php echo substr($projet['description'], 0, 300); ?></p>
+
+                            <p><?php echo substr($projet['description'], 0, 300);
+                                if (strlen($projet['description'] >300)){
+                                    echo "...";
+                                }  ?></p>
                         </div>
                     </div>
                     <?php
