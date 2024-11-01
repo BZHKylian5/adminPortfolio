@@ -256,19 +256,21 @@ footer {
 
 /* Description Banner */
 .description-banner {
-    background-color: rgba(0, 0, 0, 0.6); 
-    color: white; 
-    padding: 20px; 
-    width: 90%; 
-    max-width: 500px; 
-    text-align: center; 
-    position: absolute; 
-    bottom: 10%; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    border-radius: 8px; 
-    z-index: 1; 
+    background-color: rgba(0, 0, 0, 0.6); /* Couleur de fond légèrement grisée */
+    color: white; /* Texte en blanc */
+    padding: 20px; /* Espacement intérieur */
+    width: 100%; /* S'étend sur toute la largeur */
+    height: 35%; /* Hauteur de 35 % */
+    position: absolute; /* Positionnement absolu pour le superposer à la diapositive */
+    bottom: 0; /* Positionné en bas de la diapositive */
+    left: 0; /* Aligné à gauche */
+    text-align: center; /* Centrer le texte */
+    display: flex; /* Utiliser flex pour centrer le contenu */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    border-radius: 0 0 8px 8px; /* Arrondir les coins inférieurs si désiré */
 }
+
 
 /* Pagination Styles */
 .swiper-pagination {
