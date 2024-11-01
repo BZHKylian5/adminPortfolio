@@ -58,7 +58,7 @@ header a:hover {
     position: absolute;
     top: 0;
     right: 0; /* Changed from -100% to 0 for proper positioning */
-    width: 2em;
+    width: 20em;
     height: 100vh;
     background-color: #1a1a2e;
     color: #ffffff;
