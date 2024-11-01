@@ -2,19 +2,22 @@
 require_once "config.php";
 
 // Vérifie si l'utilisateur est connecté
+session_start();
 if (!isset($_SESSION['idUser'])) {
     header("Location: login.php"); // Redirige vers la page de connexion
     exit(); // Assure que le script s'arrête après la redirection
 }
 
-$idUser = $_SESSION['idUser']; // Assurez-vous que vous récupérez l'ID utilisateur de la session
+$idUser = $_SESSION['idUser']; // Récupère l'ID utilisateur de la session
 
-$stmt = $conn->prepare("SELECT * from utilisateur WHERE id_utilisateur = ?");
+// Récupère les informations de l'utilisateur
+$stmt = $conn->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = ?");
 $stmt->bind_param("i", $idUser);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
+// Récupère l'URL de la photo de profil
 $stmt = $conn->prepare("SELECT pp.id_utilisateur, i.url 
                          FROM photo_profil pp
                          LEFT JOIN image i ON i.id_image = pp.id_image
@@ -23,12 +26,10 @@ if ($stmt === false) {
     die("Erreur de préparation de la requête : " . $conn->error); // Affiche l'erreur si la préparation échoue
 }
 
-// Lier le paramètre
 $stmt->bind_param("i", $idUser);
 $stmt->execute();
 $result = $stmt->get_result();
 $profile = $result->fetch_assoc();
-print_r($profile)
 ?>
 
 <!DOCTYPE html>
@@ -46,15 +47,12 @@ print_r($profile)
             if (isset($user)) { // Vérifiez si l'utilisateur est défini
                 ?>
                 <img id="profilePic" src="<?php echo htmlspecialchars($profile["url"]) ?>" title="Photo de profil utilisateur">
-
-                <!-- Menu caché intégré dans le header -->
                 <div id="profileMenu" class="hidden">
                     <span id="backButton">< Retour</span>
                     <figure id="imagProfil">
                         <img src="<?php echo htmlspecialchars($profile["url"]) ?>" title="photo de profil utilisateur" id="menuProfilePic">
                         <figcaption>
                             <?php echo htmlspecialchars($user["nom"]) ?>
-        
                         </figcaption>
                     </figure>
                     <ul>
@@ -66,7 +64,6 @@ print_r($profile)
                         <a id="logoutButton" class="buttonMenu" href="logout.php">Déconnexion</a>
                     </div>
                 </div>
-
             <?php
             } else {
                 ?>
@@ -127,26 +124,22 @@ print_r($profile)
     <footer>
         <p>&copy; 2024 Kylian Houedec. Tous droits réservés.</p>
     </footer>
+
     <script>
-        // Sélection des éléments du DOM
         const profilePic = document.getElementById("profilePic");
         const profileMenu = document.getElementById("profileMenu");
         const backButton = document.getElementById("backButton");
 
-        // Fonction pour afficher le menu
         function openMenu() {
             profileMenu.classList.add("show");
         }
 
-        // Fonction pour fermer le menu
         function closeMenu() {
             profileMenu.classList.remove("show");
         }
 
-        // Ajout des événements de clic
         profilePic.addEventListener("click", openMenu);
         backButton.addEventListener("click", closeMenu);
-
     </script>
 </body>
 </html>

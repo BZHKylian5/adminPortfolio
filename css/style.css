@@ -1,44 +1,41 @@
-/** Header */
-
-/** Header */
-
+/* Header */
 header {
-    position: fixed; /* Rendre le header fixe */
-    top: 0; /* Positionner en haut */
-    left: 0; /* Alignement à gauche */
-    right: 0; /* Alignement à droite */
-    background-color: #181e3d; /* Fond bleu foncé */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre douce */
-    z-index: 1000; /* Au-dessus du contenu */
-    display: flex; /* Flexbox pour aligner les éléments */
-    align-items: center; /* Centrer verticalement */
-    justify-content: space-between; /* Espacement entre les éléments */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #181e3d;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 1.3em 3em;
 }
 
 header img {
-    width: 5em; /* Taille du logo */
+    width: 5em;
 }
 
 header a {
-    text-decoration: none; /* Pas de soulignement */
-    background-color: #007BFF; /* Couleur du bouton */
+    text-decoration: none;
+    background-color: #007BFF;
     font-weight: bold;
-    transition: background-color 0.3s ease; /* Transition douce */
+    transition: background-color 0.3s ease;
     padding: 0.5em 2em;
     color: #ffffff;
     border-radius: 50px;
 }
 
 header a:hover {
-    background-color: #0056b3; /* Couleur au survol */
+    background-color: #0056b3;
 }
 
 main {
-    margin-top: 11em; /* Pour éviter que le contenu soit caché */
+    margin-top: 11em;
 }
 
-/* Styles pour le menu de profil caché */
+/* Profile Menu */
 #profilePic {
     width: 3em;
     border-radius: 50%;
@@ -48,7 +45,7 @@ main {
 #profileMenu {
     position: absolute;
     top: 0;
-    right: -100%; /* Positionné hors de la vue à droite */
+    right: -100%;
     width: 200px;
     height: 100vh;
     background-color: #1a1a2e;
@@ -58,21 +55,14 @@ main {
     display: flex;
     flex-direction: column;
     padding: 1em;
-    transition: transform 0.4s ease; /* Animation pour le glissement */
-    transform: translateX(100%); /* Commence caché */
+    transition: transform 0.4s ease;
+    transform: translateX(100%);
 }
 
 #profileMenu.show {
-    transform: translateX(0); /* Affiche le menu en glissant depuis la droite */
+    transform: translateX(0);
 }
 
-
-#profilePic:hover + #profileMenu,
-#profileMenu:hover {
-    display: flex; /* Afficher au survol */
-}
-
-/* Bouton retour */
 #backButton {
     font-size: 0.9em;
     color: #007BFF;
@@ -84,7 +74,6 @@ main {
     color: #0056b3;
 }
 
-/* Image et nom de profil */
 #imagProfil {
     display: flex;
     align-items: center;
@@ -118,7 +107,6 @@ main {
     color: #007BFF;
 }
 
-/* Bouton de déconnexion */
 #logoutButton {
     margin-top: 1em;
     background-color: #d9534f;
@@ -135,66 +123,20 @@ main {
     background-color: #c9302c;
 }
 
-
-/* Ajoutez un espacement supérieur pour le contenu principal afin qu'il ne soit pas caché sous l'en-tête */
-main {
-    margin-top: 11em; /* Ajustez selon la hauteur de l'en-tête */
-}
-
+/* General body and layout */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Couleur de fond douce */
-    color: #333; /* Couleur du texte */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-.login-container {
-    background-color: white; /* Fond blanc pour le conteneur */
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
-    width: 300px; /* Largeur fixe */
+main {
+    margin-top: 11em;
 }
 
-h1 {
+footer {
     text-align: center;
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px; /* Espacement sous le label */
-}
-
-input[type="email"],
-input[type="password"] {
-    width: 100%; /* Remplit la largeur du conteneur */
-    padding: 10px; /* Espacement interne */
-    margin-bottom: 15px; /* Espacement sous le champ */
-    border: 1px solid #ccc; /* Bordure grise */
-    border-radius: 3px; /* Coins arrondis */
-}
-
-button {
-    width: 100%; /* Bouton pleine largeur */
-    padding: 10px;
-    background-color: #007BFF; /* Couleur bleu */
-    color: white; /* Texte blanc */
-    border: none; /* Pas de bordure */
-    border-radius: 3px; /* Coins arrondis */
-    cursor: pointer; /* Pointeur sur survol */
-}
-
-button:hover {
-    background-color: #0056b3; /* Couleur plus foncée au survol */
-}
-
-.error {
-    color: red; /* Couleur rouge pour les erreurs */
-    text-align: center; /* Centrer le texte d'erreur */
-    margin-bottom: 15px; /* Espacement sous l'erreur */
+    padding: 1em;
+    background-color: #181e3d;
+    color: #ffffff;
 }
