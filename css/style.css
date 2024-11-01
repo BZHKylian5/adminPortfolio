@@ -279,6 +279,7 @@ footer {
     z-index: 10; /* Assurez-vous qu'il est au-dessus d'autres éléments */
     display: flex; /* Utilisez flex si nécessaire pour l'alignement */
     gap: 5px; /* Ajoutez de l'espace entre les bullets */
+    flex: 2;
 }
 
 /* Pagination Bullet Styles */
