@@ -26,6 +26,17 @@ $stmt->bind_param("i", $idUser);
 $stmt->execute();
 $result = $stmt->get_result();
 $photo = $result->fetch_assoc();
+
+
+$stmt = $conn->prepare("SELECT count(*) as nbprojet FROM projet");
+if ($stmt === false) {
+    die("Erreur de préparation de la requête : " . $conn->error); // Affiche l'erreur si la préparation échoue
+}
+
+$stmt->bind_param("i", $idUser);
+$stmt->execute();
+$result = $stmt->get_result();
+$projet = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
