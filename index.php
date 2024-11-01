@@ -28,6 +28,7 @@ $stmt->bind_param("i", $idUser);
 $stmt->execute();
 $result = $stmt->get_result();
 $profile = $result->fetch_assoc();
+print_r($profile)
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +53,7 @@ $profile = $result->fetch_assoc();
                     <figure id="imagProfil">
                         <img src="<?php echo htmlspecialchars($profile["photo_profil"]) ?>" title="photo de profil utilisateur" id="menuProfilePic">
                         <figcaption>
-                            <?php echo htmlspecialchars($user["nom"]) ?>// Vous pouvez ajouter des informations supplémentaires ici
+                            <?php echo htmlspecialchars($user["nom"]) ?>
         
                         </figcaption>
                     </figure>
