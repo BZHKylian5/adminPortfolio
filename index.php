@@ -2,6 +2,11 @@
 require_once "config.php";
 // Vérifie si l'utilisateur est connecté
 
+if (!isset($_SESSION['idUser'])) {
+    header("Location: login.php"); // Redirige vers la page de connexion
+    exit(); // Assure que le script s'arrête après la redirection
+}
+
 ?>
 
 <!DOCTYPE html>

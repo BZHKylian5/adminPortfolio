@@ -37,7 +37,7 @@ header a:hover {
 
 /* Ajoutez un espacement supérieur pour le contenu principal afin qu'il ne soit pas caché sous l'en-tête */
 main {
-    margin-top: 9em; /* Ajustez selon la hauteur de l'en-tête */
+    margin-top: 11em; /* Ajustez selon la hauteur de l'en-tête */
 }
 
 body {
