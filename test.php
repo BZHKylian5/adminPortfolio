@@ -17,7 +17,7 @@ $user = $result->fetch_assoc();
 
 $stmt = $conn->prepare("SELECT pp.id_utilisateur, i.url 
                          FROM photo_profil pp
-                         LEFT JOIN image i ON i.id_image = pp.id_id_image
+                         LEFT JOIN image i ON i.id_image = pp.id_image
                          WHERE pp.id_utilisateur = ?");
 
 if ($stmt === false) {
