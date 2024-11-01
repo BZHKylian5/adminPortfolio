@@ -68,58 +68,40 @@
                 <h2>Gestion des Projets</h2>
                 <button class="btn">Ajouter un Projet</button>
                 <input type="text" placeholder="Rechercher un projet..." class="search">
-                <div class="swiper mySwiper">
-                    <div class="swiper-wrapper">
-                        <?php 
-                        // Fetch all projects
-                        $stmt = $conn->prepare("SELECT * FROM projet");
-                        if ($stmt === false) {
-                            die("Error preparing query: " . $conn->error);
-                        }
-                        
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        $projets = $result->fetch_all(MYSQLI_ASSOC); // Fetch all projects
+                <div class="swiper-wrapper">
+                <?php 
+                foreach ($projets as $projet) {
+                    // Fetch images for each project
+                    $stmt = $conn->prepare("SELECT * FROM photo_projet pp LEFT JOIN image i ON pp.id_image = i.id_image WHERE pp.id_projet = ?");
+                    $stmt->bind_param("i", $projet['id_projet']);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $imagesprojet = $result->fetch_all(MYSQLI_ASSOC);
 
-                        foreach ($projets as $projet) {
-                            // Fetch images for each project
-                            $stmt = $conn->prepare("SELECT * FROM photo_projet pp LEFT JOIN image i ON pp.id_image = i.id_image WHERE pp.id_projet = ?");
-                            if ($stmt === false) {
-                                die("Error preparing query: " . $conn->error);
-                            }
-
-                            $stmt->bind_param("i", $projet['id_projet']); // Bind the project ID
-                            $stmt->execute();
-                            $result = $stmt->get_result();
-                            $imagesprojet = $result->fetch_all(MYSQLI_ASSOC); // Fetch all images for the project
-
-                            // Check if there are images before accessing the first one
-                            if (!empty($imagesprojet)) {
-                                ?>
-                                <div class="swiper-slide">
-                                    <img src="<?php echo htmlspecialchars($imagesprojet[0]['url']); ?>" alt="Image du projet" /> <!-- Use the actual URL field here -->
-                                    <div>
-                                        <p><?php echo htmlspecialchars($projet['description']); ?></p> <!-- Assuming there's a description field -->
-                                    </div>
-                                </div>
-                                <?php
-                            } else {
-                                // Handle cases where there are no images
-                                ?>
-                                <div class="swiper-slide">
-                                    <div class="slide-background" style="background-image: url('<?php echo htmlspecialchars($imagesprojet[0]['url']); ?>');">
-                                        <div class="description-banner">
-                                            <p><?php echo htmlspecialchars($projet['description']); ?></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <?php
-                            }
-                        }
+                    if (!empty($imagesprojet)) {
+                        $imageUrl = htmlspecialchars($imagesprojet[0]['url']); // First image URL
                         ?>
-                    </div>
-                    <div class="swiper-pagination"></div>
+                        <div class="swiper-slide">
+                            <div class="slide-background" style="background-image: url('<?php echo $imageUrl; ?>');"></div>
+                            <div class="description-banner">
+                                <p><?php echo htmlspecialchars($projet['description']); ?></p>
+                            </div>
+                        </div>
+                        <?php
+                    } else {
+                        ?>
+                        <div class="swiper-slide">
+                            <div class="slide-background" style="background-color: grey;"></div> <!-- Fallback color -->
+                            <div class="description-banner">
+                                <p><?php echo htmlspecialchars($projet['description']); ?></p>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+                </div>
+                <div class="swiper-pagination"></div>
                 </div>
             </section>
 

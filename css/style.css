@@ -219,29 +219,38 @@ footer {
 }
 
 /*swiper page index*/
-
+/* Swiper Styles */
 .swiper {
     width: 100%;
-    height: 100vh; /* Ajustez la hauteur selon vos besoins */
-    position: relative; /* Positionnement relatif pour le bandeau */
+    height: 100vh; /* Full height of the viewport */
+    position: relative; /* Positioning for the overlay */
+    overflow: hidden; /* Ensure no overflow from child elements */
 }
 
 .swiper-slide {
-    display: flex;
-    align-items: flex-end; /* Alignement en bas du slide */
+    position: relative; /* Positioning for absolute children */
+    display: flex; /* Flexbox for aligning content */
+    justify-content: center; /* Center content horizontally */
+    align-items: flex-end; /* Align items to the bottom */
 }
 
 .slide-background {
-    width: 100%;
-    height: 100%;
-    background-size: cover; /* Pour couvrir l'ensemble du slide */
-    background-position: center; /* Centrer l'image */
+    width: 100%; /* Full width of the slide */
+    height: 100%; /* Full height of the slide */
+    background-size: cover; /* Cover the entire slide */
+    background-position: center; /* Center the background image */
+    position: absolute; /* Position behind the content */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    z-index: -1; /* Move it behind the text */
 }
 
 .description-banner {
-    background-color: rgba(0, 0, 0, 0.6); /* Noir transparent */
-    color: white; /* Couleur du texte */
-    padding: 20px; /* Espacement intérieur */
-    width: 100%; /* Prend toute la largeur */
-    text-align: center; /* Centrer le texte */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
+    color: white; /* Text color */
+    padding: 20px; /* Inner spacing */
+    width: 100%; /* Full width */
+    text-align: center; /* Center the text */
+    position: relative; /* Allow stacking above background */
+    z-index: 1; /* Place above the background */
 }
