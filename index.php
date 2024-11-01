@@ -14,16 +14,17 @@ require_once "config.php";
 </head>
 <body>
     <header>    
-        <h1>Tableau de Bord Admin</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Gestion des Projets</a></li>
-                <li><a href="#">Gestion des Utilisateurs</a></li>
-                <li><a href="#">Statistiques</a></li>
-                <li><a href="#">Paramètres</a></li>
-            </ul>
-        </nav>
+        <img src="./asset/img/logo/logo_KH_Admin.png" alt="logo du site web un K t un H imbriquer">
+        <?php
+            if($isLoggedIn){
+
+            }
+            else{
+        ?>
+        <a href="login.php">Connexion</a>
+        <?php    
+            }
+        ?>
     </header>
 
     <main>
