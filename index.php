@@ -17,10 +17,7 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 // Récupère l'URL de la photo de profil
-$stmt = $conn->prepare("SELECT pp.id_utilisateur, i.url 
-                         FROM photo_profil pp
-                         LEFT JOIN image i ON i.id_image = pp.id_image
-                         WHERE pp.id_utilisateur = ?");
+$stmt = $conn->prepare("SELECT count(*) as nbphoto FROM photo_projet");
 if ($stmt === false) {
     die("Erreur de préparation de la requête : " . $conn->error); // Affiche l'erreur si la préparation échoue
 }
@@ -28,7 +25,7 @@ if ($stmt === false) {
 $stmt->bind_param("i", $idUser);
 $stmt->execute();
 $result = $stmt->get_result();
-$profile = $result->fetch_assoc();
+$photo = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -49,13 +46,10 @@ $profile = $result->fetch_assoc();
                     <h3>Total Projets</h3>
                     <p>10</p>
                 </div>
-                <div class="stat">
-                    <h3>Total Utilisateurs</h3>
-                    <p>5</p>
-                </div>
+                
                 <div class="stat">
                     <h3>Total Images</h3>
-                    <p>20</p>
+                    <p><?php echo $photo['nbphoto']; ?></p>
                 </div>
             </div>
         </section>
