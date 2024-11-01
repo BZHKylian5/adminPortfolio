@@ -15,7 +15,7 @@ header {
 }
 
 header img {
-    width: 1em; /* Ajustez la taille de l'image du logo */
+    width: 7em; /* Ajustez la taille de l'image du logo */
 }
 
 header a {
@@ -23,6 +23,9 @@ header a {
     background-color: #007BFF; /* Couleur du lien */
     font-weight: bold; /* Gras pour le lien */
     transition: color 0.3s ease; /* Transition douce pour la couleur */
+    padding-inline: 1em;
+    padding-block: 0.2em;
+    color: #ffffff;
 }
 
 header a:hover {
