@@ -83,7 +83,7 @@ $photoprojet = $result->fetch_assoc();
 
                     foreach ($projets as $projet) {
                         // Fetch images for each project
-                        $stmt = $conn->prepare("SELECT * FROM photo_projet pp LEFT JOIN photo p ON pp.id_image = p.id_image WHERE pp.id_projet = ?");
+                        $stmt = $conn->prepare("SELECT * FROM photo_projet pp LEFT JOIN image i ON pp.id_image = i.id_image WHERE pp.id_projet = ?");
                         if ($stmt === false) {
                             die("Error preparing query: " . $conn->error);
                         }
