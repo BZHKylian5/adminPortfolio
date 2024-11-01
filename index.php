@@ -7,6 +7,16 @@ if (!isset($_SESSION['idUser'])) {
     exit(); // Assure que le script s'arrête après la redirection
 }
 
+$stmt = $conn -> prepare("SELECT * from utilisateur WHERE id_utilisateur = '$idUser'");
+$stmt -> execute();
+$result = $stmt -> get_result();
+$user = $result -> fetch_assoc();
+
+$stmt = $conn -> prepare("SELECT u.nom, u.email, pp.url AS photo_profil FROM utilisateur u LEFT JOIN photo_profil pp ON u.id_utilisateur = pp.id_utilisateur WHERE u.id_utilisateur = '$idUser'");
+$stmt -> execute();
+$result = $stmt -> get_result();
+$profile = $result -> fetch_assoc();
+
 ?>
 
 <!DOCTYPE html>
@@ -19,9 +29,41 @@ if (!isset($_SESSION['idUser'])) {
 </head>
 <body>
     <header>    
-        <img src="./asset/img/logo/logo_KH_Admin.png" alt="logo du site web un K t un H imbriquer">
+        <img src="./asset/img/logo/logo_KH_Admin.png" alt="logo du site web un K et un H imbriquer">
         <?php
             if($isLoggedIn){
+                ?>
+                <img id="profilePic" src="<?php echo $profile["url"] ?>" title="Photo de profil utilisateur">
+
+                <!-- Menu caché intégré dans le header -->
+                <div id="profileMenu" class="hidden">
+                    <span id="backButton">< Retour</span>
+                    <figure id="imagProfil">
+                        <img src="<?php echo $user["url"] ?>" title="photo de profil utilisateur" id="menuProfilePic">
+                        <figcaption>
+                            <?php
+
+                            ?>
+                        </figcaption>
+                    </figure>
+                    <ul>
+                        <li><a href="">Accueil</a></li>
+                        <li><a href="">Créer un projet</a></li>
+                        <li><a href="">Modifier un projet</a></li>
+                    </ul>
+                    <div>
+                        <a id="logoutButton" class="buttonMenu"  href="logout.php">Déconnexion</a>
+                    </div>
+                </div>
+
+            <?php
+        } else {
+            ?>
+            <a href="../login.php"><div id="btnConn">Connexion</div></a>
+        <?php
+        }
+        ?>
+    </div>
 
             }
             else{
