@@ -75,9 +75,6 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
                 <div class="swiper-wrapper">
                 <?php 
                 foreach ($projets as $projet) {
-                    // Fetch images for each project
-                    echo $projet['titre'];
-                    echo $projet['description'];
                     
                     $stmt = $conn->prepare("SELECT * FROM photo_projet pp LEFT JOIN image i ON pp.id_image = i.id_image WHERE pp.id_projet = ?");
                     $stmt->bind_param("i", $projet['id_projet']);
