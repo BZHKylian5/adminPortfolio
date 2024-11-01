@@ -277,6 +277,10 @@ footer {
     padding-bottom: 20px;
 }
 
+.description-banner p{
+    width: 80%;
+}
+
 
 /* Pagination Styles */
 .swiper-pagination {

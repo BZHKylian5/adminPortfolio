@@ -93,9 +93,9 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
                             // Récupérer et sécuriser la description
                             $description = htmlspecialchars($projet['description'], ENT_QUOTES, 'UTF-8');
                             // Couper la description à 300 caractères
-                            $shortDescription = substr($description, 0, 150);
+                            $shortDescription = substr($description, 0, 250);
                             // Vérifier si la description d'origine est plus longue que 300 caractères
-                            if (strlen($description) > 150) {
+                            if (strlen($description) > 250) {
                                 $shortDescription .= '...'; // Ajouter des points de suspension
                             }
                             ?>
