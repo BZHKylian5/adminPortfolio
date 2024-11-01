@@ -127,5 +127,26 @@ print_r($profile)
     <footer>
         <p>&copy; 2024 Kylian Houedec. Tous droits réservés.</p>
     </footer>
+    <script>
+        // Sélection des éléments du DOM
+        const profilePic = document.getElementById("profilePic");
+        const profileMenu = document.getElementById("profileMenu");
+        const backButton = document.getElementById("backButton");
+
+        // Fonction pour afficher le menu
+        function openMenu() {
+            profileMenu.classList.add("show");
+        }
+
+        // Fonction pour fermer le menu
+        function closeMenu() {
+            profileMenu.classList.remove("show");
+        }
+
+        // Ajout des événements de clic
+        profilePic.addEventListener("click", openMenu);
+        backButton.addEventListener("click", closeMenu);
+
+    </script>
 </body>
 </html>
