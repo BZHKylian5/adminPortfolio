@@ -281,10 +281,3 @@ footer {
     background: #007BFF; /* Active bullet color */
 }
 
-/* Add responsiveness for smaller devices */
-@media (max-width: 768px) {
-    .description-banner {
-        font-size: 0.9em; /* Smaller text size on mobile */
-        padding: 15px; /* Adjust padding */
-    }
-}

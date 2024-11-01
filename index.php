@@ -10,24 +10,26 @@ if (!isset($_SESSION['idUser'])) {
 
 $idUser = $_SESSION['idUser']; // Get user ID from session
 
+function fetchSingleValue($conn, $query, $param) {
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $param);
+    if (!$stmt->execute()) {
+        // Handle error
+        echo "Error: " . $stmt->error;
+        return null;
+    }
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
+}
+
 // Retrieve user information
-$stmt = $conn->prepare("SELECT * FROM utilisateur WHERE id_utilisateur = ?");
-$stmt->bind_param("i", $idUser);
-$stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
+$user = fetchSingleValue($conn, "SELECT * FROM utilisateur WHERE id_utilisateur = ?", $idUser);
 
 // Retrieve total number of photos
-$stmt = $conn->prepare("SELECT COUNT(*) AS nbphoto FROM photo_projet");
-$stmt->execute();
-$result = $stmt->get_result();
-$photo = $result->fetch_assoc();
+$photo = fetchSingleValue($conn, "SELECT COUNT(*) AS nbphoto FROM photo_projet", null);
 
 // Retrieve total number of projects
-$stmt = $conn->prepare("SELECT COUNT(*) AS nbprojet FROM projet");
-$stmt->execute();
-$result = $stmt->get_result();
-$photoprojet = $result->fetch_assoc();
+$photoprojet = fetchSingleValue($conn, "SELECT COUNT(*) AS nbprojet FROM projet", null);
 
 // Retrieve all projects
 $stmt = $conn->prepare("SELECT * FROM projet");
@@ -77,26 +79,15 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
                     $result = $stmt->get_result();
                     $imagesprojet = $result->fetch_all(MYSQLI_ASSOC);
 
-                    if (!empty($imagesprojet)) {
-                        $imageUrl = htmlspecialchars($imagesprojet[0]['url']); // First image URL
-                        ?>
-                        <div class="swiper-slide">
-                            <div class="slide-background" style="background-image: url('<?php echo $imageUrl; ?>');"></div>
-                            <div class="description-banner">
-                                <p><?php echo htmlspecialchars($projet['description']); ?></p>
-                            </div>
+                    $imageUrl = !empty($imagesprojet) ? htmlspecialchars($imagesprojet[0]['url']) : 'fallback_image_url.jpg'; // Set a fallback image
+                    ?>
+                    <div class="swiper-slide">
+                        <div class="slide-background" style="background-image: url('<?php echo $imageUrl; ?>');"></div>
+                        <div class="description-banner">
+                            <p><?php echo htmlspecialchars($projet['description']); ?></p>
                         </div>
-                        <?php
-                    } else {
-                        ?>
-                        <div class="swiper-slide">
-                            <div class="slide-background" style="background-color: grey;"></div> <!-- Fallback color -->
-                            <div class="description-banner">
-                                <p><?php echo htmlspecialchars($projet['description']); ?></p>
-                            </div>
-                        </div>
-                        <?php
-                    }
+                    </div>
+                    <?php
                 }
                 ?>
                 </div>
@@ -114,7 +105,7 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 while ($user = $result->fetch_assoc()) {
-                    echo "<li>" . htmlspecialchars($user['username']) . "</li>"; // Adjust according to your user table structure
+                    echo "<li>" . htmlspecialchars($user['username']) . " <button>Edit</button> <button>Delete</button></li>"; // Include action buttons
                 }
             ?>
             </ul>
@@ -123,7 +114,7 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
         <section class="upload-images">
             <h2>Télécharger des Images</h2>
             <form action="upload.php" method="post" enctype="multipart/form-data">
-                <input type="file" name="image" required>
+                <input type="file" name="image" accept="image/*" required>
                 <button type="submit" class="btn">Télécharger</button>
             </form>
         </section>
