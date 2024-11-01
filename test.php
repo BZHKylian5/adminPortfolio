@@ -15,10 +15,11 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-$stmt = $conn->prepare("SELECT *
+$stmt = $conn->prepare("SELECT pp.id_utilisateur, i.url 
                          FROM photo_profil pp
                          LEFT JOIN image i ON i.id_image = pp.id_id_image
                          WHERE pp.id_utilisateur = ?");
+
 if ($stmt === false) {
     die("Erreur de préparation de la requête : " . $conn->error); // Affiche l'erreur si la préparation échoue
 }
