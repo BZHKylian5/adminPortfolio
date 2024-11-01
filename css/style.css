@@ -5,7 +5,7 @@ header {
     top: 0; /* Positionner en haut */
     left: 0; /* Alignement à gauche */
     right: 0; /* Alignement à droite */
-    background-color: #3d3d3d; /* Fond blanc */
+    background-color: #181e3d; /* Fond blanc */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre douce */
     padding: 10px 20px; /* Espacement interne */
     z-index: 1000; /* Assurez-vous qu'il est au-dessus du contenu */
