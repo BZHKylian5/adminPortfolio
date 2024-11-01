@@ -1,8 +1,7 @@
 <?php
 require_once "config.php";
 
-// Vérifie si l'utilisateur est connecté
-session_start();
+
 if (!isset($_SESSION['idUser'])) {
     header("Location: login.php"); // Redirige vers la page de connexion
     exit(); // Assure que le script s'arrête après la redirection
@@ -41,38 +40,7 @@ $profile = $result->fetch_assoc();
     <link rel="stylesheet" href="css/style.css"> <!-- Lien vers le fichier CSS -->
 </head>
 <body>
-    <header>    
-        <img src="./asset/img/logo/logo_KH_Admin.png" alt="logo du site web un K et un H imbriquer">
-        <?php
-            if (isset($user)) { // Vérifiez si l'utilisateur est défini
-                ?>
-                <img id="profilePic" src="<?php echo htmlspecialchars($profile["url"]) ?>" title="Photo de profil utilisateur">
-                <div id="profileMenu" class="hidden">
-                    <span id="backButton">< Retour</span>
-                    <figure id="imagProfil">
-                        <img src="<?php echo htmlspecialchars($profile["url"]) ?>" title="photo de profil utilisateur" id="menuProfilePic">
-                        <figcaption>
-                            <?php echo htmlspecialchars($user["nom"]) ?>
-                        </figcaption>
-                    </figure>
-                    <ul>
-                        <li><a href="">Accueil</a></li>
-                        <li><a href="">Créer un projet</a></li>
-                        <li><a href="">Modifier un projet</a></li>
-                    </ul>
-                    <div>
-                        <a id="logoutButton" class="buttonMenu" href="logout.php">Déconnexion</a>
-                    </div>
-                </div>
-            <?php
-            } else {
-                ?>
-                <a href="../login.php"><div id="btnConn">Connexion</div></a>
-            <?php
-            }
-            ?>
-    </header>
-
+    <?php require_once "./components/header.php";?>
     <main>
         <section class="dashboard">
             <h2>Résumé des Statistiques</h2>
@@ -125,47 +93,5 @@ $profile = $result->fetch_assoc();
         <p>&copy; 2024 Kylian Houedec. Tous droits réservés.</p>
     </footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const profilePic = document.getElementById("profilePic");
-            const profileMenu = document.getElementById("profileMenu");
-            const backButton = document.getElementById("backButton");
-
-            // Fonction pour afficher/cacher le menu
-            function toggleMenu() {
-                if (profileMenu.classList.contains("show")) {
-                    profileMenu.classList.remove("show");
-                    profileMenu.classList.add("hide");
-
-                    // Retirer la classe "hide" après la transition
-                    setTimeout(() => {
-                        profileMenu.classList.remove("hide");
-                    }, 300); // Temps de la transition en ms
-                } else {
-                    profileMenu.classList.remove("hide");
-                    profileMenu.classList.add("show");
-                }
-            }
-
-            // Écouteur pour afficher le menu au clic sur l'image de profil
-            if (profilePic) {
-                profilePic.addEventListener("click", toggleMenu);
-            }
-
-            // Écouteur pour fermer le menu au clic sur le bouton "Retour"
-            if (backButton) {
-                backButton.addEventListener("click", toggleMenu);
-            }
-
-            // Écouteur pour fermer le menu en cliquant en dehors
-            document.addEventListener("click", function(event) {
-                if (!profileMenu.contains(event.target) && !profilePic.contains(event.target)) {
-                    if (profileMenu.classList.contains("show")) {
-                        toggleMenu();
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 </html>
