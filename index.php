@@ -14,7 +14,7 @@ $user = $result -> fetch_assoc();
 
 
 
-$stmt = $conn->prepare("SELECT u.nom, u.email, pp.url
+$stmt = $conn->prepare("SELECT *
                          FROM utilisateur u
                          LEFT JOIN photo_profil pp ON u.id_utilisateur = pp.id_utilisateur
                          WHERE u.id_utilisateur = ?");
