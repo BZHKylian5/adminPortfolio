@@ -10,9 +10,12 @@ if (!isset($_SESSION['idUser'])) {
 
 $idUser = $_SESSION['idUser']; // Get user ID from session
 
-function fetchSingleValue($conn, $query, $param) {
+// Update fetchSingleValue to handle queries without parameters
+function fetchSingleValue($conn, $query, $param = null) {
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $param);
+    if ($param !== null) {
+        $stmt->bind_param("i", $param);
+    }
     if (!$stmt->execute()) {
         // Handle error
         echo "Error: " . $stmt->error;
@@ -93,30 +96,6 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-        </section>
-
-        <section class="user-management">
-            <h2>Gestion des Utilisateurs</h2>
-            <button class="btn">Ajouter un Utilisateur</button>
-            <ul class="user-list">
-            <?php
-                // Retrieve all users
-                $stmt = $conn->prepare("SELECT * FROM utilisateur");
-                $stmt->execute();
-                $result = $stmt->get_result();
-                while ($user = $result->fetch_assoc()) {
-                    echo "<li>" . htmlspecialchars($user['username']) . " <button>Edit</button> <button>Delete</button></li>"; // Include action buttons
-                }
-            ?>
-            </ul>
-        </section>
-
-        <section class="upload-images">
-            <h2>Télécharger des Images</h2>
-            <form action="upload.php" method="post" enctype="multipart/form-data">
-                <input type="file" name="image" accept="image/*" required>
-                <button type="submit" class="btn">Télécharger</button>
-            </form>
         </section>
     </main>
 
