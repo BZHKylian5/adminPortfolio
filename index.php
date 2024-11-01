@@ -17,7 +17,7 @@ $user = $result -> fetch_assoc();
 $stmt = $conn->prepare("SELECT url AS photo_profil
                          FROM utilisateur u
                          LEFT JOIN photo_profil pp ON u.id_utilisateur = pp.id_utilisateur
-                         WHERE u.id_utilisateur = '$idUser");
+                         WHERE u.id_utilisateur = '$idUser'");
 if ($stmt === false) {
     die("Erreur de préparation de la requête : " . $conn->error); // Affiche l'erreur si la préparation échoue
 }
