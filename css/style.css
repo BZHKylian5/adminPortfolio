@@ -224,8 +224,9 @@ footer {
 .swiper-container {
     width: 100%;
     max-width: 100vw; /* Ensure no overflow on width */
-    height: 300px; /* Adjust height as necessary */
+    height: 30em; /* Adjust height as necessary */
     overflow: hidden; /* Prevent overflow from the Swiper */
+    gap: 30px;
 }
 
 /* Swiper Slides */
