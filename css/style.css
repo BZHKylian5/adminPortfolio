@@ -16,6 +16,7 @@ header {
 
 header img {
     width: 7em; /* Ajustez la taille de l'image du logo */
+    margin:1em
 }
 
 header a {
