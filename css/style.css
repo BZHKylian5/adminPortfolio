@@ -222,11 +222,11 @@ footer {
 
 /* Swiper Container */
 .swiper-container {
+    position: relative; /* Assurez-vous que le conteneur est relatif */
     width: 100%;
-    max-width: 100vw; /* Ensure no overflow on width */
-    height: 30em; /* Adjust height as necessary */
-    overflow: hidden; /* Prevent overflow from the Swiper */
-    
+    max-width: 100vw; /* Prévenir le débordement */
+    height: 30em; /* Ajustez la hauteur comme nécessaire */
+    overflow: hidden; /* Prévenir le débordement du Swiper */
 }
 
 /* Swiper Slides */
@@ -272,22 +272,26 @@ footer {
 
 /* Pagination Styles */
 .swiper-pagination {
-    position: absolute;
-    bottom: 10px; /* Positionne la pagination à 10 pixels du bas */
-    left: 50%; /* Centre la pagination horizontalement */
-    transform: translateX(-50%); /* Aligne la pagination au centre */
-    z-index: 10; /* Assurez-vous que la pagination est au-dessus des autres éléments */
+    position: absolute; /* Positionnement absolu */
+    bottom: 10px; /* Positionnez à 10 pixels au-dessus du bas */
+    left: 50%; /* Centrez horizontalement */
+    transform: translateX(-50%); /* Ajuste pour un centrage parfait */
+    z-index: 10; /* Assurez-vous qu'il est au-dessus d'autres éléments */
+    display: flex; /* Utilisez flex si nécessaire pour l'alignement */
+    gap: 5px; /* Ajoutez de l'espace entre les bullets */
 }
 
+/* Pagination Bullet Styles */
 .swiper-pagination-bullet {
-    background: rgba(255, 255, 255, 0.7); 
+    background: rgba(255, 255, 255, 0.7); /* Couleur de fond des bullets */
+    border-radius: 50%; /* Donnez-leur une forme ronde */
+    width: 12px; /* Largeur des bullets */
+    height: 12px; /* Hauteur des bullets */
 }
 
 .swiper-pagination-bullet-active {
-    background: #007BFF; 
-}
+    background: #007BFF; /* Couleur des bullets actives */
 
-}
 .swiper-wrapper{
     gap: 30px;
 }
