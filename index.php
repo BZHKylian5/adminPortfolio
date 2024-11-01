@@ -53,7 +53,7 @@ $projet = $result->fetch_assoc();
             <div class="stats">
                 <div class="stat">
                     <h3>Total Projets</h3>
-                    <p>10</p>
+                    <p><?php echo $projet['nbprojet']?></p>
                 </div>
                 
                 <div class="stat">
