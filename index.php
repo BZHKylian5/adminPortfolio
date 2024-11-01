@@ -89,7 +89,7 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
                         <div class="slide-background" style="background-image: url('<?php echo $imageUrl; ?>');"></div>
                         <div class="description-banner">
                             <h3><?php echo $projets[0]['titre'] ?></h3>
-                            <p><?php echo $projet[0]['description']; ?></p>
+                            <p><?php echo $projets[0]['description']; ?></p>
                         </div>
                     </div>
                     <?php
