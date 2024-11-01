@@ -89,10 +89,17 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
                         <div class="description-banner">
                             <h3><?php echo $projet['titre'] ?></h3>
 
-                            <p><?php echo substr($projet['description'], 0, 300);
-                                if (strlen($projet['description'] >300)){
-                                    echo "...";
-                                }  ?></p>
+                            <?php 
+                            // Récupérer et sécuriser la description
+                            $description = htmlspecialchars($projet['description'], ENT_QUOTES, 'UTF-8');
+                            // Couper la description à 300 caractères
+                            $shortDescription = substr($description, 0, 300);
+                            // Vérifier si la description d'origine est plus longue que 300 caractères
+                            if (strlen($description) > 300) {
+                                $shortDescription .= '...'; // Ajouter des points de suspension
+                            }
+                            ?>
+                            <p><?php echo $shortDescription; ?></p>
                         </div>
                     </div>
                     <?php
