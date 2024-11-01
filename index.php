@@ -14,13 +14,18 @@ $user = $result -> fetch_assoc();
 
 
 
-$stmt = $conn -> prepare("SELECT u.nom, u.email, pp.url AS photo_profil
+$stmt = $conn->prepare("SELECT u.nom, u.email, pp.url AS photo_profil
                          FROM utilisateur u
                          LEFT JOIN photo_profil pp ON u.id_utilisateur = pp.id_utilisateur
-                         WHERE u.id_utilisateur = '$idUser'");
-$stmt -> execute();
-$result = $stmt -> get_result();
-$user = $result -> fetch_assoc();
+                         WHERE u.id_utilisateur = ?");
+if ($stmt === false) {
+    die("Erreur de préparation de la requête : " . $conn->error); // Affiche l'erreur si la préparation échoue
+}
+
+$stmt->bind_param("i", $idUser); // Lie l'ID utilisateur à la requête
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
 
 
 ?>
