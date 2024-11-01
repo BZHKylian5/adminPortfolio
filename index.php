@@ -52,9 +52,8 @@ $profile = $result->fetch_assoc();
                     <figure id="imagProfil">
                         <img src="<?php echo htmlspecialchars($profile["photo_profil"]) ?>" title="photo de profil utilisateur" id="menuProfilePic">
                         <figcaption>
-                            <?php
-                            // Vous pouvez ajouter des informations supplémentaires ici
-                            ?>
+                            <?php echo htmlspecialchars($user["nom"]) ?>// Vous pouvez ajouter des informations supplémentaires ici
+        
                         </figcaption>
                     </figure>
                     <ul>
