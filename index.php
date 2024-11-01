@@ -44,13 +44,13 @@ $profile = $result->fetch_assoc();
         <?php
             if($isLoggedIn){
                 ?>
-                <img id="profilePic" src="<?php echo $profile["url"] ?>" title="Photo de profil utilisateur">
+                <img id="profilePic" src="<?php echo htmlspecialchars($profile["photo_profil"]) ?>" title="Photo de profil utilisateur">
 
                 <!-- Menu caché intégré dans le header -->
                 <div id="profileMenu" class="hidden">
                     <span id="backButton">< Retour</span>
                     <figure id="imagProfil">
-                        <img src="<?php echo $profile["url"] ?>" title="photo de profil utilisateur" id="menuProfilePic">
+                        <img src="<?php echo htmlspecialchars($profile["photo_profil"]) ?>" title="photo de profil utilisateur" id="menuProfilePic">
                         <figcaption>
                             <?php
 
