@@ -273,9 +273,10 @@ footer {
 /* Pagination Styles */
 .swiper-pagination {
     position: absolute;
-    bottom: 10px; 
-    left: 50%; 
-    transform: translateX(-50%); 
+    bottom: 10px; /* Positionne la pagination à 10 pixels du bas */
+    left: 50%; /* Centre la pagination horizontalement */
+    transform: translateX(-50%); /* Aligne la pagination au centre */
+    z-index: 10; /* Assurez-vous que la pagination est au-dessus des autres éléments */
 }
 
 .swiper-pagination-bullet {
@@ -284,6 +285,8 @@ footer {
 
 .swiper-pagination-bullet-active {
     background: #007BFF; 
+}
+
 }
 .swiper-wrapper{
     gap: 30px;
