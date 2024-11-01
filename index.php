@@ -122,7 +122,7 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
             loop: true, // Active le mode boucle
 
             autoplay: {
-            delay: 2500, // Délai entre les transitions (en millisecondes)
+            delay: 7000, // Délai entre les transitions (en millisecondes)
             disableOnInteraction: false, // Continue l'autoplay après interaction
         },
             pagination: {
