@@ -219,38 +219,72 @@ footer {
 }
 
 /*swiper page index*/
-/* Swiper Styles */
-.swiper {
+/* Swiper Container */
+.swiper-container {
     width: 100%;
-    height: 100vh; /* Full height of the viewport */
-    position: relative; /* Positioning for the overlay */
-    overflow: hidden; /* Ensure no overflow from child elements */
+    height: 100%; /* Adjust as necessary for your layout */
 }
 
+/* Swiper Slides */
 .swiper-slide {
-    position: relative; /* Positioning for absolute children */
     display: flex; /* Flexbox for aligning content */
     justify-content: center; /* Center content horizontally */
-    align-items: flex-end; /* Align items to the bottom */
+    align-items: center; /* Center content vertically */
+    position: relative; /* Allow absolutely positioned elements inside */
+    overflow: hidden; /* Ensure overflow is hidden */
+    border-radius: 8px; /* Rounded corners for slides */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
 }
 
+.swiper-slide:hover {
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+/* Background Image */
 .slide-background {
     width: 100%; /* Full width of the slide */
     height: 100%; /* Full height of the slide */
     background-size: cover; /* Cover the entire slide */
     background-position: center; /* Center the background image */
-    position: absolute; /* Position behind the content */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    z-index: -1; /* Move it behind the text */
+    filter: brightness(0.8); /* Optional: darken the background */
 }
 
+/* Description Banner */
 .description-banner {
-    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
     color: white; /* Text color */
     padding: 20px; /* Inner spacing */
-    width: 100%; /* Full width */
+    width: 90%; /* Full width minus padding */
+    max-width: 500px; /* Max width for larger screens */
     text-align: center; /* Center the text */
-    position: relative; /* Allow stacking above background */
+    position: absolute; /* Position above the background */
+    bottom: 10%; /* Align above the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center adjustment */
+    border-radius: 8px; /* Rounded corners for the banner */
     z-index: 1; /* Place above the background */
+}
+
+/* Pagination Styles */
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px; /* Position at the bottom of the swiper */
+    left: 50%; /* Center the pagination */
+    transform: translateX(-50%); /* Center adjustment */
+}
+
+.swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.7); /* White with some transparency */
+}
+
+.swiper-pagination-bullet-active {
+    background: #007BFF; /* Active bullet color */
+}
+
+/* Add responsiveness for smaller devices */
+@media (max-width: 768px) {
+    .description-banner {
+        font-size: 0.9em; /* Smaller text size on mobile */
+        padding: 15px; /* Adjust padding */
+    }
 }
