@@ -266,6 +266,7 @@ footer {
     left: 0; /* Aligné à gauche */
     text-align: center; /* Centrer le texte */
     display: flex; /* Utiliser flex pour centrer le contenu */
+    flex-direction: column;
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
     border-radius: 0 0 8px 8px; /* Arrondir les coins inférieurs si désiré */
@@ -294,7 +295,7 @@ footer {
 
 .swiper-pagination-bullet-active {
     background: #007BFF; /* Couleur des bullets actives */
-
+}
 .swiper-wrapper{
     gap: 30px;
 }
