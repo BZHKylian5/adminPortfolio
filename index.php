@@ -34,7 +34,7 @@ if ($stmt === false) {
 
 $stmt->execute();
 $result = $stmt->get_result();
-$projet = $result->fetch_assoc();
+$photoprojet = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +44,7 @@ $projet = $result->fetch_assoc();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="css/style.css"> <!-- Lien vers le fichier CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body>
     <?php require_once "./components/header.php";?>
@@ -53,7 +54,7 @@ $projet = $result->fetch_assoc();
             <div class="stats">
                 <div class="stat">
                     <h3>Total Projets</h3>
-                    <p><?php echo $projet['nbprojet']?></p>
+                    <p><?php echo $photoprojet['nbprojet']?></p>
                 </div>
                 
                 <div class="stat">
@@ -67,11 +68,35 @@ $projet = $result->fetch_assoc();
             <h2>Gestion des Projets</h2>
             <button class="btn">Ajouter un Projet</button>
             <input type="text" placeholder="Rechercher un projet..." class="search">
-            <ul class="project-list">
-                <li>Projet 1</li>
-                <li>Projet 2</li>
-                <li>Projet 3</li>
-            </ul>
+            <div class="swiper mySwiper">
+                
+            <div class="swiper-wrapper">
+                <?php 
+                foreach($projets as $projet) {
+                    // Fetch images for each project
+                    $stmt = $conn->prepare("SELECT * FROM photo_projet pp LEFT JOIN photo p ON pp.id_image = p.id_image WHERE pp.id_projet = ?");
+                    if ($stmt === false) {
+                        die("Erreur de préparation de la requête : " . $conn->error);
+                    }
+
+                    $stmt->bind_param("i", $projet['id_projet']); // Bind the project ID
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $imagesprojet = $result->fetch_all(MYSQLI_ASSOC); // Fetch all images for the project
+
+                    ?>
+                    <div class="swiper-slide">
+                        <img src="<?php echo htmlspecialchars($imagesprojet[0]['url']); ?>" alt="Image du projet" /> <!-- Use the actual URL field here -->
+                        <div>
+                            <p><?php echo htmlspecialchars($projet['description']); ?></p> <!-- Assuming there's a description field -->
+                        </div>
+                    </div>
+                    <?php
+                    }
+                ?>
+            </div>
+                <div class="swiper-pagination"></div>
+            </div>
         </section>
 
         <section class="user-management">
@@ -95,6 +120,16 @@ $projet = $result->fetch_assoc();
     <footer>
         <p>&copy; 2024 Kylian Houedec. Tous droits réservés.</p>
     </footer>
+      <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    pagination: {
+      el: ".swiper-pagination",
+      dynamicBullets: true,
+    },
+  });
+</script>
 </body>
 </html>
