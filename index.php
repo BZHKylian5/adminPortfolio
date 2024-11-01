@@ -72,6 +72,16 @@ $photoprojet = $result->fetch_assoc();
                 
             <div class="swiper-wrapper">
                 <?php 
+
+                $stmt = $conn->prepare("SELECT * FROM projet");
+                if ($stmt === false) {
+                    die("Erreur de préparation de la requête : " . $conn->error); // Affiche l'erreur si la préparation échoue
+                }
+
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $photoprojet = $result->fetch_assoc();
+
                 foreach($projets as $projet) {
                     // Fetch images for each project
                     $stmt = $conn->prepare("SELECT * FROM photo_projet pp LEFT JOIN photo p ON pp.id_image = p.id_image WHERE pp.id_projet = ?");
