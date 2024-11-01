@@ -12,7 +12,7 @@ header {
     display: flex; /* Utiliser flexbox pour aligner les éléments */
     align-items: center; /* Centrer verticalement */
     justify-content: space-between; /* Espacement entre les éléments */
-    padding:3em
+    padding:1.3em
 }
 
 header img {
