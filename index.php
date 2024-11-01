@@ -107,6 +107,12 @@ $projets = $result->fetch_all(MYSQLI_ASSOC);
 
     <script>
         var swiper = new Swiper(".swiper-container", {
+            loop: true, // Active le mode boucle
+
+            autoplay: {
+            delay: 2500, // Délai entre les transitions (en millisecondes)
+            disableOnInteraction: false, // Continue l'autoplay après interaction
+        },
             pagination: {
                 el: ".swiper-pagination",
                 dynamicBullets: true,

@@ -226,7 +226,7 @@ footer {
     max-width: 100vw; /* Ensure no overflow on width */
     height: 30em; /* Adjust height as necessary */
     overflow: hidden; /* Prevent overflow from the Swiper */
-    gap: 30px;
+    
 }
 
 /* Swiper Slides */
@@ -284,4 +284,7 @@ footer {
 
 .swiper-pagination-bullet-active {
     background: #007BFF; 
+}
+.swiper-wrapper{
+    gap: 30px;
 }
